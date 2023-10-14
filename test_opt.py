@@ -26,8 +26,8 @@ def _main_():
                         pass
         # ['simple', 'hindsight', 'cluster', 'gan', 'diffusion', 'rectified']
         model_name_list = ['simple', 'hindsight', 'cluster', 'gan', 'diffusion', 'rectified']
-        # for approach in model_name_list:
-        #     train_all(data, args, approach)
+        for approach in model_name_list:
+            train_all(data, args, approach)
 
         obj_target = data.objective(data.graph_test, data.y_test.cpu().numpy())
         obj_target_1 = data.decoding(data.graph_test, data.y_test.cpu().numpy())
