@@ -2,7 +2,7 @@ import os
 
 def toy_args():
     args = {'data_set': 'toy',
-            'data_type': 3,
+            'data_type': 2,
             'data_size': 10000,
             'network': 'mlp',
             'output_dim': 1,
@@ -11,7 +11,7 @@ def toy_args():
             'test_freq': 3000,
             'batch_dim': 1024,
             'hidden_dim': 128,
-            'num_layer': 4,
+            'num_layer': 3,
             'output_act': None,
             'learning_rate': 1e-3,
             'learning_rate_decay': [1000,0.9],
