@@ -22,7 +22,7 @@ def toy_args():
             'test_dim': 512,
             'time_step': 1000,
             'inf_step': 100,
-            'eta':0 ,
+            'eta':0.5,
             'ode_solver': 'Euler'}
     return args
 

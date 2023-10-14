@@ -142,12 +142,12 @@ def train_all(data, args, model_type):
     # plt.show()
 
 
-def test_single(x_test, args, model_name, sample_num=1):
+def test_single(x_test, args, model_name, sample_num=1, latent_data=False):
     instance = args['instance'] 
     inf_step = args['inf_step']
     network = args['network']
     test_dim = x_test.shape[0]
-    model = torch.load(f'models/{instance}/{model_name}_{network}.pth')
+    model = torch.load(f'models/{instance}/{model_name}_{network}.pth', map_location=torch.device('cpu'))
     model.eval()
     z_test = 0
     with torch.no_grad():
@@ -181,7 +181,10 @@ def test_single(x_test, args, model_name, sample_num=1):
             NotImplementedError
     if sample_num>1 and model_name not in ['cluster', 'hindsight']:
         y_pred = y_pred.view(test_dim, y_pred.shape[-1], -1) ##  batch * output_dim * sample
-    return y_pred
+    if latent_data:
+        return y_pred, z_test
+    else:
+        return y_pred
 
 
 def plot_single(data, args, model_name):
@@ -246,7 +249,7 @@ def plot_all(data, args, model_name_list):
         # x_test, y_pred = np.load(f'results/{instance}/{model_name}_test_data.npy', allow_pickle=True)
 
         x_test = torch.linspace(-1,1, 100).to(data.device).view(-1,1)#torch.rand(size=[200, 1]).to(data.device) * 2 - 1
-        y_pred, z_sample = test_single(x_test, args, model_name, sample_num=10)
+        y_pred, z_sample = test_single(x_test, args, model_name, sample_num=10, latent_data=True)
         x_test = x_test.cpu().numpy()
         y_pred = y_pred.cpu().numpy()
         if model_name in ['simple', 'hindsight', 'cluster']:
