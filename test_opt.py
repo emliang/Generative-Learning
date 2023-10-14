@@ -6,8 +6,8 @@ from default_args import *
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
                       
 def _main_():
-    for prob in ['max_cut']:
-        for dim in [50]:
+    for prob in ['max_clique', 'max_is', 'max_cut']:
+        for dim in [50, 100]:
             args = opt_args()
             args['data_set'] = prob
             args['graph_dim'] = dim
