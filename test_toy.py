@@ -14,7 +14,5 @@ def _main_():
     model_name_list = ['simple', 'hindsight', 'cluster', 'gan', 'diffusion', 'rectified']
     # for model_name in model_name_list:
     #     train_all(data, args, model_name)
-    # for model_name in model_name_list:
-    #     plot_single(data, args, model_name)
     plot_all(data, args, model_name_list)
 _main_()
